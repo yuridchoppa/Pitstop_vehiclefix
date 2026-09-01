@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_card"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register New Vehicle 🚘"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Vehicle Type Radio / Chips -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Vehicle Type:"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp" />
+
+    <RadioGroup
+        android:id="@+id/rgVehicleType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbTypeAuto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="🛺 3-Wheeler"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbTypeCar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🚗 Car"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbTypeBike"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🏍️ Bike"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <!-- Make & Model Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMakeModel"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Make &amp; Model (e.g. Bajaj Compact / Honda City)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMakeModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Registration / Plate -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPlate"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="License Plate / Registration No">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPlate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Fuel / Powertrain -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilFuel"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Fuel / Powertrain (Petrol / CNG / LPG / Electric / Diesel)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFuel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shortcut 1: Emergency SOS -->
+    <shortcut
+        android:shortcutId="shortcut_sos"
+        android:enabled="true"
+        android:icon="@drawable/ic_sos"
+        android:shortcutShortLabel="@string/shortcut_sos_short"
+        android:shortcutLongLabel="@string/shortcut_sos_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pitstop.vehiclefix"
+            android:targetClass="com.example.vehiclefix.ui.MainActivity" />
+        <categories android:name="android.intent.category.DEFAULT" />
+    </shortcut>
+
+    <!-- Shortcut 2: Vehicle Health -->
+    <shortcut
+        android:shortcutId="shortcut_health"
+        android:enabled="true"
+        android:icon="@drawable/ic_diagnose"
+        android:shortcutShortLabel="@string/shortcut_health_short"
+        android:shortcutLongLabel="@string/shortcut_health_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pitstop.vehiclefix"
+            android:targetClass="com.example.vehiclefix.ui.health.VehicleHealthMonitorActivity" />
+    </shortcut>
+</shortcuts>

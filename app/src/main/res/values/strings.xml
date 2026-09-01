@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Pitstop</string>
+    <string name="nav_diagnose">Diagnose</string>
+    <string name="nav_guides">Fix Guides</string>
+    <string name="nav_garages">Garages</string>
+    <string name="nav_sos">Stranded SOS</string>
+    <string name="nav_my_garage">My Garage</string>
+
+    <!-- Shortcuts Strings -->
+    <string name="shortcut_sos_short">Roadside SOS</string>
+    <string name="shortcut_sos_long">Pitstop Emergency Roadside SOS</string>
+    <string name="shortcut_health_short">Vehicle Health</string>
+    <string name="shortcut_health_long">Check Vehicle Telemetry &amp; Health</string>
+</resources>

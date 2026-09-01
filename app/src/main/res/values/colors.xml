@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Subtle Minimalist Light (Day) Palette -->
+    <color name="primary">#0D9488</color>
+    <color name="primary_variant">#0F766E</color>
+    <color name="primary_light">#14B8A6</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <color name="secondary">#475569</color>
+    <color name="secondary_variant">#334155</color>
+    <color name="on_secondary">#FFFFFF</color>
+
+    <!-- Subtle Safety & Alert Accents -->
+    <color name="emergency_red">#E11D48</color>
+    <color name="emergency_red_dark">#BE123C</color>
+    <color name="on_emergency">#FFFFFF</color>
+
+    <color name="success_green">#059669</color>
+    <color name="warning_yellow">#D97706</color>
+
+    <!-- Subtle Minimalist Surfaces -->
+    <color name="bg_dark">#F8FAFC</color>
+    <color name="bg_surface">#FFFFFF</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_card_highlight">#F1F5F9</color>
+    <color name="card_stroke">#E2E8F0</color>
+
+    <!-- High-Legibility Protruding Typography -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#334155</color>
+    <color name="text_muted">#64748B</color>
+
+    <!-- Basic -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Minimalist Badges -->
+    <color name="badge_easy">#059669</color>
+    <color name="badge_mod">#0D9488</color>
+    <color name="badge_hard">#D97706</color>
+    <color name="badge_expert">#E11D48</color>
+
+    <!-- Semantic Adaptive UI Colors -->
+    <color name="bg_chip">#E2E8F0</color>
+    <color name="bg_button_tonal">#F1F5F9</color>
+    <color name="bg_step_num">#E2E8F0</color>
+    <color name="badge_subtle_primary">#E0F2FE</color>
+    <color name="badge_subtle_green">#DCFCE7</color>
+    <color name="badge_subtle_red">#FFE4E6</color>
+</resources>

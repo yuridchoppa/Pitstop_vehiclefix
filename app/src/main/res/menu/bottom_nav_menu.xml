@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_diagnose"
+        android:icon="@drawable/ic_diagnose"
+        android:title="@string/nav_diagnose" />
+
+    <item
+        android:id="@+id/nav_guides"
+        android:icon="@drawable/ic_guides"
+        android:title="@string/nav_guides" />
+
+    <item
+        android:id="@+id/nav_garages"
+        android:icon="@drawable/ic_garage"
+        android:title="@string/nav_garages" />
+
+    <item
+        android:id="@+id/nav_sos"
+        android:icon="@drawable/ic_sos"
+        android:title="@string/nav_sos" />
+
+    <item
+        android:id="@+id/nav_my_garage"
+        android:icon="@drawable/ic_my_garage"
+        android:title="@string/nav_my_garage" />
+</menu>

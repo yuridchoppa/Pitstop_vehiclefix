@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_scan_reticle"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbPart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Replacement part item"
+        app:buttonTint="@color/primary" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPartName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3-Wheeler Clutch Inner Wire"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPartPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Approx Price: ₹80 - ₹150 ($1 - $2)"
+            android:textColor="@color/success_green"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPartRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#2000E676"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="2dp"
+        android:text="PART"
+        android:textColor="@color/success_green"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Pitstop ⚡ - Smart Diagnostics & Vehicle Super-App</title>
+  
+  <!-- PWA & Mobile Web Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#00D29D">
+  
+  <!-- Apple iOS Web App Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pitstop">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230B111C'/><circle cx='50' cy='50' r='38' fill='%23132034' stroke='%2300D29D' stroke-width='4'/><text x='50%' y='60%' font-size='42' text-anchor='middle' fill='%2300D29D'>⚡</text></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <span class="greeting" id="userGreeting">Hello, Alex! 👋</span>
+        <button class="vehicle-pill" id="btnSwitchVehicle">
+          <span id="headerVehicleName">🚗 Hyundai i20 [DL-01]</span>
+          <span>▾</span>
+        </button>
+      </div>
+      <button class="sos-btn" id="btnQuickSosHeader">
+        <span>🚨</span> SOS
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+      <!-- TAB 1: DIAGNOSE & HOME -->
+      <section id="tab-diagnose" class="tab-view active">
+        <!-- Connected Vehicle Hero Stage Card -->
+        <div class="card" style="border-color: var(--primary);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="circle-icon circle-teal" style="font-size: 22px;">🚗</div>
+              <div>
+                <div style="font-weight: 700; font-size: 15px;" id="webStageVehicleName">Hyundai i20 Asta 1.2</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">DL-01-AB-1234 • Petrol</div>
+              </div>
+            </div>
+            <span class="badge-tag success">● LIVE</span>
+          </div>
+          <div class="telemetry-grid" style="margin-top: 12px;">
+            <div class="telemetry-item">
+              <span style="font-size: 10px; color: var(--text-secondary);">Fuel / Battery</span>
+              <span class="tele-value" style="font-size: 12px;">78% (420 km)</span>
+            </div>
+            <div class="telemetry-item">
+              <span style="font-size: 10px; color: var(--text-secondary);">Odometer</span>
+              <span class="tele-value" style="font-size: 12px;">34,500 km</span>
+            </div>
+            <div class="telemetry-item">
+              <span style="font-size: 10px; color: var(--text-secondary);">Fleet Health</span>
+              <span class="tele-value" style="font-size: 12px; color: var(--success);">96% Optimal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Diagnostics Hero Card -->
+        <div class="card card-hero">
+          <div class="card-header-row">
+            <span class="card-title">AI Diagnostics ✦</span>
+            <span class="badge-tag">SMART AI</span>
+          </div>
+          <p class="card-subtitle">Instant visual and acoustic fault analysis</p>
+
+          <!-- 3 Pinterest Circular Action Nodes -->
+          <div class="ai-actions-grid">
+            <button class="ai-node-btn" id="btnAiVision">
+              <div class="circle-icon circle-teal">📷</div>
+              <span class="node-label">Vision AI</span>
+            </button>
+            <button class="ai-node-btn" id="btnAiSound">
+              <div class="circle-icon circle-cyan">🎙️</div>
+              <span class="node-label">Sound AI</span>
+            </button>
+            <button class="ai-node-btn" id="btnAiObd">
+              <div class="circle-icon circle-purple">🔌</div>
+              <span class="node-label">OBD-II</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4-Grid Pinterest Action Dock -->
+        <div class="dock-grid">
+          <button class="dock-item" id="btnDockHealth">
+            <div class="circle-icon circle-teal">🩺</div>
+            <span class="dock-label">Health</span>
+          </button>
+          <button class="dock-item" id="btnDockService">
+            <div class="circle-icon circle-cyan">🛠️</div>
+            <span class="dock-label">Service</span>
+          </button>
+          <button class="dock-item" id="btnDockSos">
+            <div class="circle-icon circle-red">🚨</div>
+            <span class="dock-label">SOS</span>
+          </button>
+          <button class="dock-item" id="btnDockGarages">
+            <div class="circle-icon circle-amber">📍</div>
+            <span class="dock-label">Garages</span>
+          </button>
+        </div>
+
+        <!-- Active Service Tracker Card -->
+        <div class="card" id="trackerCard" style="display: none; background: #162438; border-color: var(--primary);">
+          <div class="card-header-row">
+            <span style="font-size: 13px; font-weight: 700;" id="trackTitle">Periodic Service</span>
+            <span class="badge-tag success" id="trackBadge">In-Progress</span>
+          </div>
+          <span style="font-size: 11px; color: var(--text-secondary);" id="trackSubtitle">Apex 24/7 Hub • Today 3:30 PM</span>
+        </div>
+
+        <!-- Instant Repair Guides Header & Filters -->
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+          <span style="font-size: 15px; font-weight: 700;">Instant DIY Repair Guides</span>
+          
+          <div class="chips-container">
+            <button class="chip active" data-type="ALL">🚘 All</button>
+            <button class="chip" data-type="CAR">🚗 Cars</button>
+            <button class="chip" data-type="TWO_WHEELER">🏍️ 2-Wheeler</button>
+            <button class="chip" data-type="THREE_WHEELER">🛺 3-Wheeler</button>
+          </div>
+
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="inputSearchIssues" placeholder="Search symptom (flat tire, chain, battery, misfire)...">
+          </div>
+        </div>
+
+        <!-- Issues List Container -->
+        <div id="issuesListContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </section>
+
+      <!-- TAB 2: FIX GUIDES -->
+      <section id="tab-guides" class="tab-view">
+        <span style="font-size: 17px; font-weight: 700;">Mechanic Manuals & DIY Guides</span>
+        <div id="guidesListContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </section>
+
+      <!-- TAB 3: GARAGES -->
+      <section id="tab-garages" class="tab-view">
+        <span style="font-size: 17px; font-weight: 700;">24/7 Certified Garages & Towing</span>
+        <div id="garagesListContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+      </section>
+
+      <!-- TAB 4: SOS BEACON -->
+      <section id="tab-sos" class="tab-view">
+        <div class="card" style="border-color: var(--emergency); background: rgba(255, 71, 87, 0.08);">
+          <span style="font-size: 18px; font-weight: 800; color: var(--emergency);">🚨 Roadside Emergency SOS</span>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+            1-Tap emergency broadcast dispatches nearby tow trucks and sends your live GPS coordinates.
+          </p>
+          <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <button class="btn-primary" style="background: var(--emergency); color: white;" id="btnTriggerSos">
+              🚨 Broadcast Emergency SOS Beacon
+            </button>
+            <a class="btn-primary" style="background: #25D366; color: white; text-decoration: none;" id="btnSosWhatsapp" href="#" target="_blank">
+              💬 Dispatch via WhatsApp (1-Tap)
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: MY GARAGE & SETTINGS -->
+      <section id="tab-mygarage" class="tab-view">
+        <span style="font-size: 17px; font-weight: 700;">My Garage & Settings</span>
+        
+        <!-- Profile Card -->
+        <div class="card">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="circle-icon circle-teal">👤</div>
+            <div>
+              <div style="font-weight: 700;">Alex Driver</div>
+              <div style="font-size: 11px; color: var(--text-secondary);">alex.driver@pitstop.io</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Health Telemetry Card -->
+        <div class="card" style="border-color: var(--primary);">
+          <div class="card-header-row">
+            <span class="card-title">🩺 Live Vehicle Telemetry</span>
+            <span class="badge-tag success">96% OPTIMAL</span>
+          </div>
+          <div class="telemetry-grid" style="margin-top: 12px;">
+            <div class="telemetry-item">
+              <span style="font-size: 11px; color: var(--text-secondary);">Engine Temp</span>
+              <span class="tele-value">91°C</span>
+            </div>
+            <div class="telemetry-item">
+              <span style="font-size: 11px; color: var(--text-secondary);">12V Battery</span>
+              <span class="tele-value">12.6V</span>
+            </div>
+            <div class="telemetry-item">
+              <span style="font-size: 11px; color: var(--text-secondary);">Brake Pads</span>
+              <span class="tele-value">84%</span>
+            </div>
+            <div class="telemetry-item">
+              <span style="font-size: 11px; color: var(--text-secondary);">Engine Oil</span>
+              <span class="tele-value">88%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Library Card -->
+        <div class="card" id="btnOpenWebLibrary" style="cursor: pointer; border-color: var(--primary);">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="circle-icon circle-teal">📚</div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Vehicle Specs Library</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">Browse 100+ OEM specs &amp; maintenance tables</div>
+              </div>
+            </div>
+            <span style="font-size: 12px; color: var(--primary); font-weight: 700;">Explore ➔</span>
+          </div>
+        </div>
+
+        <!-- Appearance Switcher Card -->
+        <div class="card">
+          <div class="card-header-row">
+            <span style="font-size: 14px; font-weight: 700;">🌓 Appearance Mode</span>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button class="chip active" id="btnThemeDark">🌙 Dark</button>
+            <button class="chip" id="btnThemeLight">☀️ Light</button>
+          </div>
+        </div>
+
+        <!-- Settings Quick Link -->
+        <div class="card" id="btnOpenWebSettings" style="cursor: pointer;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="circle-icon circle-purple">⚙️</div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Settings &amp; Safety</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">Emergency contact, metric units, cache</div>
+              </div>
+            </div>
+            <span style="font-size: 12px; color: var(--text-secondary);">Open ➔</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL: Vehicle Library -->
+    <div class="modal-overlay" id="modalVehicleLibrary">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <span style="font-size: 16px; font-weight: 700;">📚 Vehicle Specs Library</span>
+          <button class="btn-close" aria-label="Close dialog" onclick="closeModals()">✕</button>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary);">
+          Browse official OEM engine specs, oil grades, and recommended tire pressures.
+        </p>
+        <div id="webLibraryContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;"></div>
+      </div>
+    </div>
+
+    <!-- MODAL: Settings -->
+    <div class="modal-overlay" id="modalWebSettings">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <span style="font-size: 16px; font-weight: 700;">⚙️ App Settings &amp; Preferences</span>
+          <button class="btn-close" aria-label="Close dialog" onclick="closeModals()">✕</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="card">
+            <div style="font-weight: 700; font-size: 13px;">🚨 Emergency Contact Phone</div>
+            <input type="tel" value="+91 98765 43210" style="width: 100%; margin-top: 6px; padding: 8px; border-radius: 8px; border: 1px solid var(--card-stroke); background: var(--bg-surface); color: var(--text-primary);">
+          </div>
+          <div class="card" style="border-color: var(--primary); background: rgba(0, 210, 157, 0.06);">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 13px; color: var(--primary);">📱 Pitstop for Android</div>
+                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">Download the full native Android app (.APK)</div>
+              </div>
+              <span class="badge-tag success">FREE</span>
+            </div>
+            <a href="https://github.com" target="_blank" id="linkDownloadApk" class="btn-primary" style="display: block; text-align: center; text-decoration: none; margin-top: 8px; padding: 8px; font-size: 12px;">📥 Download Android APK (5.2 MB)</a>
+          </div>
+          <div class="card">
+            <div style="font-weight: 700; font-size: 13px;">💾 Offline Diagnostic Cache</div>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">14.2 MB cached for offline roadside assistance</div>
+            <button class="btn-primary" style="margin-top: 8px; padding: 8px; font-size: 12px;" onclick="alert('✅ Offline diagnostic database is up to date!')">Verify Offline Cache</button>
+          </div>
+          <div class="card">
+            <div style="font-weight: 700; font-size: 13px;">📜 Privacy Policy &amp; Terms</div>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">Read our on-device privacy guarantee</div>
+            <a href="./privacy_policy.html" target="_blank" style="display: inline-block; margin-top: 8px; font-size: 12px; color: var(--primary); text-decoration: none; font-weight: bold;">View Privacy Policy ➔</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Dock -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-tab="tab-diagnose">
+        <span class="nav-icon">⚡</span>
+        <span>Diagnose</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-guides">
+        <span class="nav-icon">📖</span>
+        <span>Guides</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-garages">
+        <span class="nav-icon">📍</span>
+        <span>Garages</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-sos">
+        <span class="nav-icon">🚨</span>
+        <span>SOS</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-mygarage">
+        <span class="nav-icon">🚘</span>
+        <span>Garage</span>
+      </button>
+    </nav>
+
+    <!-- MODAL: Service Booking -->
+    <div class="modal-overlay" id="modalServiceBooking">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <span style="font-size: 16px; font-weight: 700;">🛠️ Book Vehicle Service</span>
+          <button class="btn-close" aria-label="Close dialog" onclick="closeModals()">✕</button>
+        </div>
+        <span style="font-size: 12px; color: var(--primary);" id="bookingSubtitle">For: 🚗 Hyundai i20 (DL-01-AB-1234)</span>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">1. Choose Service Tier:</span>
+          <div class="card" style="border-color: var(--primary);">
+            <div style="font-weight: 700; font-size: 13px;">🛠️ Periodic Standard Maintenance</div>
+            <div style="font-size: 11px; color: var(--primary); margin-top: 2px;">₹2,999 ($36) • 1.5 hrs • Synthetic Oil + 35-Pt Checkup</div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btnSubmitBooking">Confirm Service Booking ➔</button>
+      </div>
+    </div>
+
+    <!-- MODAL: AI Vision Scanner -->
+    <div class="modal-overlay" id="modalVisionScan">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <span style="font-size: 16px; font-weight: 700;">📷 AI Vision Scanner</span>
+          <button class="btn-close" aria-label="Close dialog" onclick="closeModals()">✕</button>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary);">
+          Take a photo or upload an image of your tire, engine compartment, or dashboard warning light.
+        </p>
+        <button class="btn-primary" id="btnSimulateVisionScan">📷 Capture &amp; Run AI Diagnostics</button>
+      </div>
+    </div>
+
+    <!-- MODAL: AI Sound Analyzer -->
+    <div class="modal-overlay" id="modalSoundScan">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <span style="font-size: 16px; font-weight: 700;">🎙️ AI Sound Analyzer</span>
+          <button class="btn-close" aria-label="Close dialog" onclick="closeModals()">✕</button>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary);">
+          Hold phone near the engine or wheels to classify mechanical knocks or squeals.
+        </p>
+        <button class="btn-primary" id="btnSimulateSoundScan">🎙️ Listen (3 Sec Acoustic Scan)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
